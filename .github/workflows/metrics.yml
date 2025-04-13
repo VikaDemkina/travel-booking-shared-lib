@@ -1,0 +1,50 @@
+name: Metrics Collection
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  collect-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Record Start Time
+        id: start_time
+        run: echo "start_time=$(date +%s)" >> $GITHUB_OUTPUT
+      
+      - name: Simulate build process
+        run: |
+          echo "Simulating build process..."
+          sleep 5
+          echo "Build completed successfully!"
+      
+      - name: Record End Time
+        id: end_time
+        run: echo "end_time=$(date +%s)" >> $GITHUB_OUTPUT
+      
+      - name: Calculate Build Time
+        run: |
+          START_TIME="${{ steps.start_time.outputs.start_time }}"
+          END_TIME="${{ steps.end_time.outputs.end_time }}"
+          BUILD_TIME=$((END_TIME - START_TIME))
+          echo "BUILD_TIME=$BUILD_TIME" >> $GITHUB_ENV
+          echo "Build took $BUILD_TIME seconds"
+
+      - name: Create Build Metrics
+        run: |
+          echo "Repository: travel-booking-shared-lib" > build-metrics.txt
+          echo "Branch: ${{ github.ref_name }}" >> build-metrics.txt
+          echo "Commit: ${{ github.sha }}" >> build-metrics.txt
+          echo "Build Time: ${{ env.BUILD_TIME }} seconds" >> build-metrics.txt
+          echo "Status: success" >> build-metrics.txt
+          echo "Date: $(date)" >> build-metrics.txt
+          cat build-metrics.txt
+
+      - name: Upload Build Time Metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-metrics
+          path: build-metrics.txt
