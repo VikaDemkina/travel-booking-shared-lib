@@ -1,0 +1,1 @@
+// This file will contain shared React hooks\n// Since this is a shared lib, hooks are kept minimal\n
