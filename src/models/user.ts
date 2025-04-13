@@ -1,0 +1,1 @@
+export interface User {\n  id: string;\n  email: string;\n  firstName: string;\n  lastName: string;\n  role: 'user' | 'admin';\n}\n\nexport interface AuthResponse {\n  user: User;\n  token: string;\n}\n
