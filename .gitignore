@@ -1,0 +1,1 @@
+# Dependencies\nnode_modules/\n\n# Build files\ndist/\nbuild/\nlib/\n\n# Testing\ncoverage/\n\n# Editor files\n.vscode/\n.idea/\n*.sublime-*\n\n# Logs\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# Environment variables\n.env\n.env.local\n.env.development.local\n.env.test.local\n.env.production.local\n\n# Misc\n.DS_Store\nThumbs.db\n
