@@ -1,0 +1,1 @@
+module.exports = {\n  preset: 'ts-jest',\n  testEnvironment: 'node',\n  testMatch: ['**/__tests__/**/*.ts?(x)', '**/?(*.)+(spec|test).ts?(x)'],\n  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts'],\n};\n
